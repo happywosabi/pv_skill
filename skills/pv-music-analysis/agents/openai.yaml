@@ -1,0 +1,4 @@
+interface:
+  display_name: "分析节拍与音乐段落"
+  short_description: "为歌曲生成PV：分析节拍与音乐段落，核验实际产物并说明人的下一步"
+  default_prompt: "使用 $pv-music-analysis 完成当前PV项目的这一阶段，检查前置条件并记录实际结果。"

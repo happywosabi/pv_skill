@@ -1,0 +1,4 @@
+interface:
+  display_name: "生成逐词歌词时间"
+  short_description: "为歌曲生成PV：生成逐词歌词时间，核验实际产物并说明人的下一步"
+  default_prompt: "使用 $pv-lyric-alignment 完成当前PV项目的这一阶段，检查前置条件并记录实际结果。"

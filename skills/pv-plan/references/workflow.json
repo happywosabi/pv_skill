@@ -1,0 +1,523 @@
+{
+  "schema_version": 1,
+  "modes": [
+    "new-song",
+    "existing-render",
+    "revise-scenes",
+    "repair-analysis"
+  ],
+  "stages": [
+    {
+      "id": "pv-input-check",
+      "title": "检查歌曲与需求输入",
+      "description": "检查程序化 PV 项目的歌曲、歌词、输出要求与既有产物是否完整、可读取且适用；在开始制作或更换输入时使用。",
+      "modes": [
+        "new-song",
+        "existing-render",
+        "revise-scenes",
+        "repair-analysis"
+      ],
+      "dependencies": [],
+      "watch": [
+        "@brief",
+        "@audio",
+        "@lyrics",
+        "data/*.json"
+      ],
+      "human": "实际缺失的歌曲/歌词文件、无法由文件判断的歌曲版本或核心交付目标。不要要求用户手填 AI 能探测的音频参数。"
+    },
+    {
+      "id": "pv-environment-check",
+      "title": "审计制作环境",
+      "description": "只读审计 PV 工程的系统、Python/uv、Bun、Chrome、ffmpeg、模型缓存和存储条件；用于安装前或环境故障定位。",
+      "modes": [
+        "new-song",
+        "existing-render",
+        "revise-scenes",
+        "repair-analysis"
+      ],
+      "dependencies": [],
+      "watch": [
+        "analysis/pyproject.toml",
+        "analysis/uv.lock",
+        "app/package.json",
+        "app/bun.lock"
+      ],
+      "human": "只有所需工具无法在当前权限下安装、离线镜像/网络凭据缺失、或必须换机器时才请求具体协助。"
+    },
+    {
+      "id": "pv-runtime-setup",
+      "title": "安装基础运行工具",
+      "description": "为已授权的 PV 制作安装或复用 uv、合适的 Python、Bun、ffmpeg 和浏览器；按任务模式只安装必要工具。",
+      "modes": [
+        "new-song",
+        "existing-render",
+        "revise-scenes",
+        "repair-analysis"
+      ],
+      "dependencies": [
+        "pv-environment-check"
+      ],
+      "watch": [
+        "@brief",
+        "analysis/pyproject.toml"
+      ],
+      "human": "工具明确拒绝权限、只有系统管理员能安装的组件、或必须提供离线安装包时。"
+    },
+    {
+      "id": "pv-python-setup",
+      "title": "配置 Python 分析依赖",
+      "description": "安装、验证并按平台适配 PV 的 Python 音频分析环境；仅在生成或修复音频时序数据时使用。",
+      "modes": [
+        "new-song",
+        "repair-analysis"
+      ],
+      "dependencies": [
+        "pv-runtime-setup"
+      ],
+      "watch": [
+        "analysis/pyproject.toml",
+        "analysis/uv.lock",
+        "analysis/.venv/pyvenv.cfg"
+      ],
+      "human": "缺少必须的镜像/凭据或平台无法满足已选路线时；AI自行处理常规依赖冲突。"
+    },
+    {
+      "id": "pv-renderer-setup",
+      "title": "配置浏览器渲染依赖",
+      "description": "安装 Bun 锁定依赖并验证 Chrome/WebGL2/ffmpeg 的 PV 渲染链；用于初次预览、导出或渲染环境恢复。",
+      "modes": [
+        "new-song",
+        "existing-render",
+        "revise-scenes"
+      ],
+      "dependencies": [
+        "pv-runtime-setup"
+      ],
+      "watch": [
+        "app/package.json",
+        "app/bun.lock",
+        "app/tsconfig*.json",
+        "app/vite.config.ts"
+      ],
+      "human": "需要用户提供指定浏览器/受管机器权限时；普通项目代码修复由AI处理。"
+    },
+    {
+      "id": "pv-project-adapt",
+      "title": "适配歌曲与工程配置",
+      "description": "将 pdoom 程序化 PV 工程适配到新歌曲、语言、画幅或段落结构，清理旧歌专属规则并保持现有作品可恢复。",
+      "modes": [
+        "new-song"
+      ],
+      "dependencies": [
+        "pv-input-check"
+      ],
+      "watch": [
+        "@audio",
+        "@lyrics",
+        "@brief",
+        "analysis/common.py",
+        "analysis/pron.py",
+        "analysis/ctcalign.py",
+        "analysis/align.py",
+        "analysis/analyze.py"
+      ],
+      "human": "歌曲语言/核心格式无法从输入确定，或用户指定的模型/素材必须补齐时。"
+    },
+    {
+      "id": "pv-model-setup",
+      "title": "选择与准备音频模型",
+      "description": "选择、下载和验证 PV 的声部分离、主唱、CTC与Whisper模型，记录具体权重和缓存；不用于只有成片导出的任务。",
+      "modes": [
+        "new-song",
+        "repair-analysis"
+      ],
+      "dependencies": [
+        "pv-python-setup"
+      ],
+      "watch": [
+        "@brief",
+        "analysis/common.py",
+        "analysis/ctc_emissions.py",
+        "analysis/whisper_run.py"
+      ],
+      "human": "离线权重、私有模型访问或用户必须坚持指定模型但尚未提供时；普通公开模型由AI选择验证。"
+    },
+    {
+      "id": "pv-stem-separation",
+      "title": "分离并校验声部",
+      "description": "从当前歌曲生成 Demucs 人声/鼓/贝斯/其他伴奏及独立主唱，检查声部质量并保存可追溯产物。",
+      "modes": [
+        "new-song",
+        "repair-analysis"
+      ],
+      "dependencies": [
+        "pv-model-setup",
+        "pv-project-adapt"
+      ],
+      "watch": [
+        "@audio",
+        "analysis/common.py",
+        "analysis/pyproject.toml"
+      ],
+      "human": "若分离质量不足，可请求用户已有主唱/工程stem；先由AI尝试有依据的模型/参数调整。"
+    },
+    {
+      "id": "pv-time-calibration",
+      "title": "校准音频时间基准",
+      "description": "测量分离声部相对最终播放音轨的延迟/漂移，配置统一的无间隙解码时间基准；在换歌或重做声部分离后使用。",
+      "modes": [
+        "new-song",
+        "repair-analysis"
+      ],
+      "dependencies": [
+        "pv-stem-separation"
+      ],
+      "watch": [
+        "@audio",
+        "analysis/common.py",
+        "analysis/stems/**/*.wav"
+      ],
+      "human": "仅当用户提供的源声部属于不同剪辑/速度版本，必须取得匹配源素材时。"
+    },
+    {
+      "id": "pv-alignment-prep",
+      "title": "准备歌词对齐中间数据",
+      "description": "生成校时后的16k人声、两模型多声道CTC概率、Whisper核对JSON和人声特征缓存；补齐歌词对齐全部前置输入。",
+      "modes": [
+        "new-song",
+        "repair-analysis"
+      ],
+      "dependencies": [
+        "pv-time-calibration",
+        "pv-model-setup"
+      ],
+      "watch": [
+        "@audio",
+        "@lyrics",
+        "analysis/common.py",
+        "analysis/ctc_emissions.py",
+        "analysis/whisper_run.py",
+        "analysis/vocal_feats.py"
+      ],
+      "human": "无额外人类步骤；源素材或平台阻塞交对应前置skill。"
+    },
+    {
+      "id": "pv-lyric-alignment",
+      "title": "生成逐词歌词时间",
+      "description": "将当前歌曲的正确歌词通过整曲CTC强制对齐与信号细化生成逐词/音节时间及置信度；在对齐数据缺失或过期时使用。",
+      "modes": [
+        "new-song",
+        "repair-analysis"
+      ],
+      "dependencies": [
+        "pv-alignment-prep"
+      ],
+      "watch": [
+        "@lyrics",
+        "analysis/pron.py",
+        "analysis/ctcalign.py",
+        "analysis/align.py",
+        "analysis/work/emission_*.npy",
+        "analysis/work/whisper_turbo_prompt.json",
+        "analysis/work/vocal_feats.npz"
+      ],
+      "human": "真正听不清、歌曲与歌词不一致且AI无法判定时，请用户确认具体词或演唱版本。"
+    },
+    {
+      "id": "pv-music-analysis",
+      "title": "分析节拍与音乐段落",
+      "description": "生成 PV 的节拍/小节、段落、声部能量和鼓点/人声起音数据；适配当前歌曲的速度、拍号与结构。",
+      "modes": [
+        "new-song",
+        "repair-analysis"
+      ],
+      "dependencies": [
+        "pv-alignment-prep"
+      ],
+      "watch": [
+        "@audio",
+        "analysis/analyze.py",
+        "analysis/common.py",
+        "analysis/work/vocal_feats.npz"
+      ],
+      "human": "风格或段落存在真实歧义时征询用户偏好；常规音乐结构识别由AI完成。"
+    },
+    {
+      "id": "pv-timing-review",
+      "title": "审查并修正音画时间",
+      "description": "通过听音与声谱/音高/起音图审查逐词歌词、节拍和小节数据，修正疑难边界并标注剩余不确定性。",
+      "modes": [
+        "new-song",
+        "repair-analysis"
+      ],
+      "dependencies": [
+        "pv-lyric-alignment",
+        "pv-music-analysis"
+      ],
+      "watch": [
+        "@audio",
+        "@lyrics",
+        "data/*.json",
+        "analysis/align.py",
+        "analysis/analyze.py",
+        "analysis/qa_plot.py",
+        "analysis/zoom.py"
+      ],
+      "human": "只请求用户判断AI确实无法分辨的演唱词/拍位，提供短片段和候选解释；不把整套QA转交用户。"
+    },
+    {
+      "id": "pv-concept",
+      "title": "形成 PV 创作概念",
+      "description": "根据歌曲主题、情绪与用户意图制定程序化 PV 的核心概念、叙事和反复母题；用于新作品或明确的整体概念重做。",
+      "modes": [
+        "new-song"
+      ],
+      "dependencies": [
+        "pv-input-check"
+      ],
+      "watch": [
+        "@audio",
+        "@lyrics",
+        "@brief"
+      ],
+      "human": "用户尚未给出的关键表达意图、明显互斥方向或需要其决定的审美取舍；可起草的问题不阻塞独立工作。"
+    },
+    {
+      "id": "pv-style",
+      "title": "设计风格与视觉规范",
+      "description": "把 PV 概念落实成调色板、字体、构图、运动和材质规范，并用代表画面验证；用于新风格或全局视觉修订。",
+      "modes": [
+        "new-song"
+      ],
+      "dependencies": [
+        "pv-concept"
+      ],
+      "watch": [
+        "@brief",
+        "docs/TREATMENT.md",
+        "app/src/engine/palette.ts",
+        "app/src/engine/type.ts",
+        "app/src/engine/post.ts"
+      ],
+      "human": "真实的审美取舍或指定字体/参考素材缺失；不得把每个小颜色决定都变成确认请求。"
+    },
+    {
+      "id": "pv-storyboard",
+      "title": "设计逐段分镜与转场",
+      "description": "将歌词、音乐结构和风格拆成可执行的 PV 场景、镜头、逐词文字行为与转场；用于新PV或明确的分镜重做。",
+      "modes": [
+        "new-song"
+      ],
+      "dependencies": [
+        "pv-style",
+        "pv-timing-review"
+      ],
+      "watch": [
+        "@brief",
+        "data/*.json",
+        "docs/TREATMENT.md"
+      ],
+      "human": "用户对关键叙事/表现有尚未解决的选择时；AI负责完整分镜草案和合理的常规决策。"
+    },
+    {
+      "id": "pv-assets",
+      "title": "准备字体、素材与音高资产",
+      "description": "生成或整理 PV 场景需要的字体实例、纹理/矢量/音高曲线和来源记录，检查目标分辨率下的实际可用性。",
+      "modes": [
+        "new-song",
+        "revise-scenes"
+      ],
+      "dependencies": [
+        "pv-storyboard",
+        "pv-renderer-setup"
+      ],
+      "watch": [
+        "@audio",
+        "@brief",
+        "app/public/fonts/**/*",
+        "analysis/make_fonts.py",
+        "app/src/scenes/fuse-pitch.ts"
+      ],
+      "human": "用户指定但未提供的字体/图片/品牌素材；可以由AI生成或用工程原生构造的素材自行完成。"
+    },
+    {
+      "id": "pv-timeline",
+      "title": "编排与验证场景时间轴",
+      "description": "将 PV 分镜落实为歌词与节拍锚定的 TimelineEntry，验证窗口覆盖、复用实例和转场；在分镜或时序数据变化时使用。",
+      "modes": [
+        "new-song",
+        "revise-scenes"
+      ],
+      "dependencies": [
+        "pv-storyboard",
+        "pv-timing-review",
+        "pv-renderer-setup"
+      ],
+      "watch": [
+        "data/*.json",
+        "app/src/timeline.ts",
+        "docs/TREATMENT.md"
+      ],
+      "human": "涉及用户明确要求决定的剪辑取舍；常规拍点和窗口实现由AI处理。"
+    },
+    {
+      "id": "pv-scene-build",
+      "title": "实现程序化场景",
+      "description": "根据已确定分镜与视觉规范实现或修改 PV 场景代码、逐词歌词动画和镜头；覆盖2D/3D/GLSL场景制作。",
+      "modes": [
+        "new-song",
+        "revise-scenes"
+      ],
+      "dependencies": [
+        "pv-assets",
+        "pv-timeline"
+      ],
+      "watch": [
+        "data/*.json",
+        "app/src/timeline.ts",
+        "app/src/engine/*.ts",
+        "app/src/scenes/*.ts",
+        "app/src/engine/glsl/*.ts"
+      ],
+      "human": "只有实质审美反馈或外部素材缺失需要人；AI完成具体代码和首轮审查。"
+    },
+    {
+      "id": "pv-renderer-repair",
+      "title": "修复渲染器与平台问题",
+      "description": "诊断并修复 PV 引擎、GLSL、字体合成、浏览器平台或导出脚本的具体故障；不用于常规场景创作。",
+      "modes": [],
+      "dependencies": [
+        "pv-renderer-setup"
+      ],
+      "watch": [
+        "app/src/engine/**/*.ts",
+        "app/src/main.ts",
+        "app/scripts/render.ts",
+        "app/vite.config.ts"
+      ],
+      "human": "无法访问的受管环境/用户明确指定的范围冲突；AI处理普通修复。"
+    },
+    {
+      "id": "pv-preview-review",
+      "title": "审查预览、静帧与短片",
+      "description": "检查 PV 的构图、歌词同步、镜头、转场与首尾，生成静帧/边界拼图/短片并修复实际发现的问题。",
+      "modes": [
+        "new-song",
+        "existing-render",
+        "revise-scenes"
+      ],
+      "dependencies": [
+        "pv-renderer-setup",
+        "pv-scene-build"
+      ],
+      "watch": [
+        "@audio",
+        "data/*.json",
+        "app/src/**/*.ts",
+        "app/public/fonts/**/*"
+      ],
+      "human": "AI无法代表用户决定的审美取舍；提供具体对比与建议，不只要求用户自行审片。"
+    },
+    {
+      "id": "pv-render-performance",
+      "title": "评估与优化渲染成本",
+      "description": "测量 PV 目标分辨率的GPU渲染/读回与编码成本，选择采样、并发和缓存参数，并优化实际瓶颈。",
+      "modes": [
+        "new-song",
+        "revise-scenes"
+      ],
+      "dependencies": [
+        "pv-preview-review"
+      ],
+      "watch": [
+        "@brief",
+        "app/src/**/*.ts",
+        "app/scripts/render.ts"
+      ],
+      "human": "只有用户需要在明显不同的画质/时间成本之间决定，或指定资源约束无法满足时。"
+    },
+    {
+      "id": "pv-montage",
+      "title": "生成片尾场景回放图片",
+      "description": "按最新 PV 场景生成并核对片尾回放plates代表图片，维护其时间选择、排序和片尾消费者一致性。",
+      "modes": [
+        "new-song",
+        "existing-render",
+        "revise-scenes"
+      ],
+      "dependencies": [
+        "pv-preview-review",
+        "pv-render-performance"
+      ],
+      "watch": [
+        "app/src/scenes/*.ts",
+        "app/src/timeline.ts",
+        "data/*.json",
+        "app/plates.json"
+      ],
+      "human": "用户对片尾叙事有待决定的要求时；AI负责选代表时间并验证。"
+    },
+    {
+      "id": "pv-export",
+      "title": "导出完整 PV 视频",
+      "description": "用 Chrome 与 ffmpeg 导出已审查的 PV，配置分辨率、运动模糊、并发、编码与音轨，保存可复现命令和日志。",
+      "modes": [
+        "new-song",
+        "existing-render",
+        "revise-scenes"
+      ],
+      "dependencies": [
+        "pv-montage",
+        "pv-render-performance"
+      ],
+      "watch": [
+        "@audio",
+        "@brief",
+        "data/*.json",
+        "app/src/**/*.ts",
+        "app/scripts/render.ts",
+        "app/public/plates/*.jpg",
+        "app/public/fonts/**/*"
+      ],
+      "human": "实际权限/资源不足或用户坚持的输出格式无法满足时；常规本地导出已在制作授权范围。"
+    },
+    {
+      "id": "pv-final-review",
+      "title": "验收最终成片",
+      "description": "验证最终 PV 文件的完整解码、音画同步、场景边界、颜色、歌词可读性和首尾；用于导出后正式交付前。",
+      "modes": [
+        "new-song",
+        "existing-render",
+        "revise-scenes"
+      ],
+      "dependencies": [
+        "pv-export"
+      ],
+      "watch": [
+        "@audio",
+        "@brief",
+        "data/*.json",
+        "app/src/timeline.ts"
+      ],
+      "human": "用户特别要求最终审美签收或必须由其决定的剩余取舍时；不默认把最终检查全部交给用户。"
+    },
+    {
+      "id": "pv-delivery",
+      "title": "交付成片与制作记录",
+      "description": "整理并交付已验收的 PV、复现参数、来源与已知限制，完成本地制作任务；外部上传仅在用户明确要求时处理。",
+      "modes": [
+        "new-song",
+        "existing-render",
+        "revise-scenes"
+      ],
+      "dependencies": [
+        "pv-final-review"
+      ],
+      "watch": [
+        "@brief"
+      ],
+      "human": "仅当用户要求发布且缺平台/账号信息或最后的外部操作权限时。"
+    }
+  ]
+}

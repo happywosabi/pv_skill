@@ -1,0 +1,4 @@
+interface:
+  display_name: "校准音频时间基准"
+  short_description: "为歌曲生成PV：校准音频时间基准，核验实际产物并说明人的下一步"
+  default_prompt: "使用 $pv-time-calibration 完成当前PV项目的这一阶段，检查前置条件并记录实际结果。"

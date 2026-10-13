@@ -1,0 +1,4 @@
+interface:
+  display_name: "适配歌曲与工程配置"
+  short_description: "为歌曲生成PV：适配歌曲与工程配置，核验实际产物并说明人的下一步"
+  default_prompt: "使用 $pv-project-adapt 完成当前PV项目的这一阶段，检查前置条件并记录实际结果。"
