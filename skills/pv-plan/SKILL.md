@@ -7,7 +7,7 @@ description: "程序化 PV 制作的总入口：检查歌曲和实际产物，�
 
 ## 先识别任务
 
-读取[共享执行协议](references/protocol.md)。工程根目录由用户指定或从当前目录向上定位包含 `app/`、`analysis/` 的项目；不要把技能安装目录当工程根目录。尊重当前任务范围：
+读取[共享执行协议](references/protocol.md)。工程根目录由用户指定或从当前目录向上定位包含 `app/`、`analysis/` 的项目；不要把技能安装目录当工程根目录。没有制作工程时，按[内置 pdoom 脚本说明](references/pdoom-scripts.md)使用`bootstrap_project.py`把模板复制到实际工作目录，再检查用户歌曲/歌词和缺失资源。复制模板不代表已准备好分析数据、字体或成片。尊重当前任务范围：
 
 - `new-song`：从新歌制作 PV。
 - `existing-render`：重新导出已有作品，不安装分析模型。
@@ -42,12 +42,14 @@ AI完成安装、分析、设计、编码和首轮审查；人提供不可推断
 
 - [状态协议和命令](references/protocol.md)：所有阶段共用，开始与交接时读。
 - [工程约束](references/project.md)：换歌、分镜、场景和引擎工作时读。
+- [内置 pdoom 脚本与模板](references/pdoom-scripts.md)：查找原项目脚本、准备工作工程或确认运行依赖时读。
 - [运行工具与依赖](references/environment.md)：安装/平台检查时读。
 - [模型准备](references/models.md)：选择、下载、运行音频模型时读。
 - [分析前置与时序检查](references/analysis.md)：分析与人工校验时读。
 - [预览、性能、蒙太奇与导出](references/render.md)：制作验证和导出时读。
 - [阶段清单](references/workflow.json)：路由元数据与依赖；正文在每个同级技能目录。
 - [workflow.py](scripts/workflow.py)：标准库状态/媒体检查助手，默认无模型下载和环境安装。
+- [bootstrap_project.py](scripts/bootstrap_project.py)：校验并复制内置工程源码；默认只读预检查，不覆盖已有不同文件。
 
 ## 使用示例
 

@@ -1,5 +1,7 @@
 # 渲染、审片与交付
 
+`render.ts`、main/engine/scene代码与Bun/Vite配置已包含在总入口的工程模板中，详见[pdoom脚本说明](pdoom-scripts.md)。先复制到实际ROOT；仍需准备歌曲、正式JSON、实际字体/回放资产及浏览器环境，不能仅运行资源目录中的render.ts就声称成片可用。
+
 命令从app/执行，输出放任务目录。下面open/t=2,6,8仅适用于原作品；换歌用真实timeline窗口和有效时间。
 
 ## 预览与审查

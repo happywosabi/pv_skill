@@ -120,7 +120,8 @@
         "analysis/pron.py",
         "analysis/ctcalign.py",
         "analysis/align.py",
-        "analysis/analyze.py"
+        "analysis/analyze.py",
+        ".pv-project-source.json"
       ],
       "human": "歌曲语言/核心格式无法从输入确定，或用户指定的模型/素材必须补齐时。"
     },

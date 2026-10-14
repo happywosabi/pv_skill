@@ -1,5 +1,7 @@
 # 环境安装与平台适配
 
+脚本/依赖配置已随技能打包，详见[pdoom脚本说明](pdoom-scripts.md)。先选择用户工程或复制模板；下面的analysis/app指实际ROOT中的目录。源码骨架含锁文件，不含已安装的包、权重、歌曲或字体。
+
 ## 原项目与任务模式
 
 分析：Python>=3.12、uv、analysis/pyproject.toml和uv.lock；渲染：Bun、app/bun.lock、Google Chrome、ffmpeg libx264。仅导出已提交作品无需安装Python包/模型；仅修分析无需Bun/Chrome。

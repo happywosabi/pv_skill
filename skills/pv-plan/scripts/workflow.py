@@ -339,10 +339,29 @@ def inspect(root, audio_value='audio/pdoom.mp3', lyrics_value='lyrics/lyrics.src
         tools[name] = shutil.which(name)
     paths = ['analysis/.venv/pyvenv.cfg', 'app/node_modules', 'analysis/.cache',
              'analysis/stems', 'analysis/work', 'docs/TREATMENT.md', 'app/src/timeline.ts']
+    source_snapshot = None
+    marker = root / '.pv-project-source.json'
+    if marker.is_file():
+        try:
+            source = read_json(marker)
+            missing = []
+            for relative in source.get('excluded_asset_paths', []):
+                path = Path(relative)
+                if path.is_absolute() or '..' in path.parts:
+                    raise ValueError('Invalid reference asset path in project marker.')
+                if not (root / path).exists():
+                    missing.append(relative)
+            source_snapshot = {'repository': source.get('repository'), 'commit': source.get('commit'),
+                               'bundled_code_files': len(source.get('files', [])),
+                               'missing_reference_assets': missing,
+                               'scope': 'Reference assets omitted from template; required assets depend on the adapted project.'}
+        except (OSError, ValueError, TypeError, AttributeError) as exc:
+            source_snapshot = {'error': str(exc)}
     return {'root': str(root), 'platform': platform.system(), 'architecture': platform.machine(),
             'audio': media, 'lyrics': lyric_info, 'tools': tools,
             'free_disk_bytes': shutil.disk_usage(root).free,
             'artifacts': {path: (root / path).exists() for path in paths},
+            'source_snapshot': source_snapshot,
             'timing': check_timing(root),
             'montage_images': len(list((root / 'app/public/plates').glob('fig*.jpg'))),
             'note': 'Existence is not stage completion; no packages/models installed by inspect.'}

@@ -1,0 +1,507 @@
+{
+  "schema_version": 1,
+  "repository": "https://github.com/mexicat/pdoom-video",
+  "commit": "fa164b74fd0b26a99375715b619c55b4a0fb3d05",
+  "license": "MIT; preserve bundled LICENSE and upstream asset credits",
+  "files": [
+    {
+      "path": ".gitignore",
+      "sha256": "ceb1f9437de5d9f35b80b181dc975aca29bd5d87170fbd1d0d15510c12f4b3ab",
+      "size": 231
+    },
+    {
+      "path": "LICENSE",
+      "sha256": "5fc212466ce7183be5d85a3ee34fea461712842d5cd256b470978a83577083cb",
+      "size": 1074
+    },
+    {
+      "path": "README.md",
+      "sha256": "6ca4a3da57a3747d4fdf9f98b5c360e8c14d43e5eae630307f850836687c9289",
+      "size": 7892
+    },
+    {
+      "path": "analysis/align.py",
+      "sha256": "16c52ff97438d97eaccb52663844fd97f757ab82c378708ac5ed214312615ea4",
+      "size": 19625
+    },
+    {
+      "path": "analysis/analyze.py",
+      "sha256": "a1bdfc7082aaed9b94183250903c02318b5f0b2679e9a6088e3d7605f1861095",
+      "size": 19530
+    },
+    {
+      "path": "analysis/common.py",
+      "sha256": "ddff5a922e887832ec649f8226ec9695eade47b523bcd0ac2db45085d119d18b",
+      "size": 3439
+    },
+    {
+      "path": "analysis/ctc_emissions.py",
+      "sha256": "6f6950775afdf3dfd8c2f97bf8a669f350aa861c0a027ca941d7332d13225c7e",
+      "size": 2201
+    },
+    {
+      "path": "analysis/ctcalign.py",
+      "sha256": "dfc9b0682e36a4aec62f43391e9ba29c04cda33d2b36715c4b2b0a5982772512",
+      "size": 6612
+    },
+    {
+      "path": "analysis/make_fonts.py",
+      "sha256": "15a5e30d5673df02d6e602343137e8c0b5f06a00d32c4c1c7226331393a1a067",
+      "size": 1023
+    },
+    {
+      "path": "analysis/pron.py",
+      "sha256": "394a94dd9fa3e95522385ee6b52de813a78d1cd003f4c032cec17316a7196000",
+      "size": 1469
+    },
+    {
+      "path": "analysis/pyproject.toml",
+      "sha256": "5ab918bd3c2fbf09388dea89de98fcba03871a2e0dfecddb9fecd87940b5fdec",
+      "size": 407
+    },
+    {
+      "path": "analysis/qa_plot.py",
+      "sha256": "fad9c10259cc75e22ad182b50fed2e638c4a0044bc62512a656c39d180941512",
+      "size": 3762
+    },
+    {
+      "path": "analysis/uv.lock",
+      "sha256": "7ab359cca900b5a2553936b996256171cd0256ff6862264310f4db113128e7d1",
+      "size": 523093
+    },
+    {
+      "path": "analysis/vocal_feats.py",
+      "sha256": "dbfa09c54ac61d25310067502f1ef3856ff68009a52de317b9e858f573f733e8",
+      "size": 1798
+    },
+    {
+      "path": "analysis/whisper_run.py",
+      "sha256": "75ecc9f9902606b28412df2e312bf235c9e6ce72f774909906c6d534b4e5ce27",
+      "size": 1356
+    },
+    {
+      "path": "analysis/zoom.py",
+      "sha256": "9882ba138ce883efedc1460fdccf0a402e9a5a1661f47680e200c55d51725f9e",
+      "size": 4301
+    },
+    {
+      "path": "app/.gitignore",
+      "sha256": "c9966ff04b65f78bd896bceb4edbb4e5c83c1aa95535cc7cd5ee8d3ea5bc7db5",
+      "size": 388
+    },
+    {
+      "path": "app/bun.lock",
+      "sha256": "a2b756acf5cc268f3f14dc48520d7b453eb83139b0e369776dbf81c50441ac88",
+      "size": 19020
+    },
+    {
+      "path": "app/index.html",
+      "sha256": "b531304b130b91362e1ef5aa0618edfbf2035b4882f0b61b7f8109fa069dceea",
+      "size": 1907
+    },
+    {
+      "path": "app/package.json",
+      "sha256": "73a592e9b1c8aebf211c4ae1ca13d8fc897aabd5efb8f447572d2a5e1e2b9b6f",
+      "size": 397
+    },
+    {
+      "path": "app/plates.json",
+      "sha256": "19eaab88256bc595ad38c33db2a812ea4b0939e09cdbf9c79b778b514ba61a0d",
+      "size": 227
+    },
+    {
+      "path": "app/scripts/render.ts",
+      "sha256": "0d9b00e593fc881a9e576357604563fcd49f43d10289f9ba02d00f8dbc86e7e8",
+      "size": 20522
+    },
+    {
+      "path": "app/src/engine/audio.ts",
+      "sha256": "f43e20578f445ee952e8196c1c5fa00c13563c4d24b259a92b37c29b495df6b5",
+      "size": 5435
+    },
+    {
+      "path": "app/src/engine/engine.ts",
+      "sha256": "25c7599e7727bd4abd1bcb7bdeb284071580d2d3122bb5b1f347bbb78d4c85d2",
+      "size": 35873
+    },
+    {
+      "path": "app/src/engine/gl.ts",
+      "sha256": "05126116d767ba87875274664ace6dd7e4b93ed917166a6f0dec7f93ae50dc46",
+      "size": 11491
+    },
+    {
+      "path": "app/src/engine/glsl/common.ts",
+      "sha256": "abcf66f116aeac0f8cf20e865b581a4fb9fe2b4c0f47a22e795f1d659af90d08",
+      "size": 11064
+    },
+    {
+      "path": "app/src/engine/hud.ts",
+      "sha256": "9dcf8ba2ef614f87b6f3aa8834baa9b33d3e8589104b9e4f5145ad814414ba58",
+      "size": 7755
+    },
+    {
+      "path": "app/src/engine/lines.ts",
+      "sha256": "afd4d20fb5d0d472b2f05585917388047e7f2297b9cb08adcc8bdac6e3763a27",
+      "size": 7778
+    },
+    {
+      "path": "app/src/engine/lyrics.ts",
+      "sha256": "03f360eb8aad243fe4b7186e7a1c6009b244969ffee0ce203998ab6120a879db",
+      "size": 4150
+    },
+    {
+      "path": "app/src/engine/palette.ts",
+      "sha256": "162f3caba0dc0a82a88d3cfcd87ce92057701f0d4a11789b7263071c2de6e20c",
+      "size": 1290
+    },
+    {
+      "path": "app/src/engine/post.ts",
+      "sha256": "98e91f6d1e231fdadab6a06d2e7057f5dc0b861b3fd84f79b57ea319d388f2a0",
+      "size": 11047
+    },
+    {
+      "path": "app/src/engine/scale.ts",
+      "sha256": "868ae545b1414e01f9a50a395bcd84081b84653a19485a7599f8a894eac5a9b0",
+      "size": 615
+    },
+    {
+      "path": "app/src/engine/scene.ts",
+      "sha256": "b60b698d595760ac45a8ae2eccd5ca0b6ff0c0e38c34b0d748ab82a6f26913b5",
+      "size": 3985
+    },
+    {
+      "path": "app/src/engine/stroke.ts",
+      "sha256": "1a59c766f50eb85883c318d19780e037f6fa5122c8844689c60bef656f896ee5",
+      "size": 14549
+    },
+    {
+      "path": "app/src/engine/type.ts",
+      "sha256": "2c70468e22d6b4bf99d6b67b007d882ba8f24d4549bf970fea57a37e8e085dfb",
+      "size": 9573
+    },
+    {
+      "path": "app/src/engine/util.ts",
+      "sha256": "717fff8fc177040fc038067725e13b6f7ef7670b7a466f268404672dfaa44a4c",
+      "size": 7537
+    },
+    {
+      "path": "app/src/main.ts",
+      "sha256": "bc7957f8941a842030f4cab370070cde82f2579b77288f18ac0047c642963dd8",
+      "size": 10932
+    },
+    {
+      "path": "app/src/scenes/_motifs.ts",
+      "sha256": "292440fb23a9ca2377c30bf50ebf32764e09ef2a5cda180ac40bf6681bd137de",
+      "size": 6254
+    },
+    {
+      "path": "app/src/scenes/ascent-eye.ts",
+      "sha256": "db5a4b7b0af8d549a9c9d8dce3954ae348bb807d89f3ff7d7f06ea3bd598c231",
+      "size": 10871
+    },
+    {
+      "path": "app/src/scenes/ascent-note.ts",
+      "sha256": "d69f20297f6a6141c508e94d5c3b7a9c5833dcf2b4868e3710694b535d6ac18f",
+      "size": 9652
+    },
+    {
+      "path": "app/src/scenes/ascent-odo.ts",
+      "sha256": "46aba29f5806d3d32e2bf4897c2037825f4044451cd8553530c26d3b28a555ea",
+      "size": 6063
+    },
+    {
+      "path": "app/src/scenes/ascent.ts",
+      "sha256": "1f5d3c78570f247dd8b191c01dbf068594eb59a10d878396637d3317d83502e2",
+      "size": 39749
+    },
+    {
+      "path": "app/src/scenes/bureau.ts",
+      "sha256": "ff7c04b108316e9aeaf1a28daabc07e632e36adf496b5fbe3c8be273b05d0d29",
+      "size": 57727
+    },
+    {
+      "path": "app/src/scenes/dense-askew.ts",
+      "sha256": "17fa6ead3a4d28054bd752b1b9dea9c0a86f411bb3230bb709b2b2fd387e3d02",
+      "size": 30003
+    },
+    {
+      "path": "app/src/scenes/dense-gpu.ts",
+      "sha256": "8b68bfd4d665580a3e347bc59bc0fa54f01de0b1f3d0fa5459714e7e5e9ae47f",
+      "size": 7481
+    },
+    {
+      "path": "app/src/scenes/dense-press.ts",
+      "sha256": "73fff6d6ebc858f8dba04bc030ace8595bef82904b9f746523313ea3d6f0098f",
+      "size": 33362
+    },
+    {
+      "path": "app/src/scenes/dense.ts",
+      "sha256": "fc4a5e3345f79c49f04ae39bffae6439bbcda5e15036c11724a0fe8b41daf070",
+      "size": 7328
+    },
+    {
+      "path": "app/src/scenes/fuse-pitch.ts",
+      "sha256": "c87c975a8f7d6b7fe9b346310b134455a9638e27294b886a17fe01a13f1c5bf0",
+      "size": 2666
+    },
+    {
+      "path": "app/src/scenes/fuse.ts",
+      "sha256": "56772344d4315b13802a7fc2887d9506d23ebcb35d21049daf3234e9dea91c00",
+      "size": 56176
+    },
+    {
+      "path": "app/src/scenes/hook.ts",
+      "sha256": "a1d85505ef6a64a2fc945338c4cd11ad4d445319408c1b1fb2cea5597c179dc2",
+      "size": 37631
+    },
+    {
+      "path": "app/src/scenes/ilya-glsl.ts",
+      "sha256": "9fe37647112061ed45a8eb16b131e690fd30040ee1ce7abfae4ba37b7af169b2",
+      "size": 24235
+    },
+    {
+      "path": "app/src/scenes/ilya-room.ts",
+      "sha256": "3f3039625c347129f99206e6586b880ed314ee768812deb6f2afa54a8587e93c",
+      "size": 22459
+    },
+    {
+      "path": "app/src/scenes/ilya.ts",
+      "sha256": "a7a9d107674f347c22c1a99f9986a60492c350e0122e78ed7cbb7332eb66a85c",
+      "size": 9291
+    },
+    {
+      "path": "app/src/scenes/leftturn-gantt.ts",
+      "sha256": "f391dd53e49e03c0436bf530c1485b622e9c0dbe45f41e80e7a2cc0709de2f70",
+      "size": 15599
+    },
+    {
+      "path": "app/src/scenes/leftturn-map.ts",
+      "sha256": "174b6a1319721da58ca9ffddef3ecf38d488f63d2a617741a2a2652a72dbbfe4",
+      "size": 25008
+    },
+    {
+      "path": "app/src/scenes/leftturn.ts",
+      "sha256": "71f010d279888f7df6f7e14bc3eeaad86c56e7053a8721cfc49a31468e7109d0",
+      "size": 27284
+    },
+    {
+      "path": "app/src/scenes/loom-glsl.ts",
+      "sha256": "d09bab132be36e04b5074e10021664b80a41bdf65bc2d659356c8d8f2cba60da",
+      "size": 3689
+    },
+    {
+      "path": "app/src/scenes/loom-tree.ts",
+      "sha256": "8f09a70da9f4577fc04532e3d2254f049ba2e846b8f0f81ae262a71794ba0e81",
+      "size": 14450
+    },
+    {
+      "path": "app/src/scenes/loom.ts",
+      "sha256": "dd4fecabd22fb8575f4c01bda3c101a9e7cb63a3295a5f3c1cef470240bfa913",
+      "size": 22964
+    },
+    {
+      "path": "app/src/scenes/loss.ts",
+      "sha256": "5e334fa4f923d54b5bdbe61274c2af50a23008d5cc721f01572700a04f39006a",
+      "size": 48269
+    },
+    {
+      "path": "app/src/scenes/open-geo.ts",
+      "sha256": "bb8726d9556235a085bf34d28789e0f625fe8945eef932a5a52d13f5a810945c",
+      "size": 13047
+    },
+    {
+      "path": "app/src/scenes/open.ts",
+      "sha256": "fc245cf49cdf7c0783ee3e3c8084420fb844dd5802a0812b05bebe075dcc4961",
+      "size": 65398
+    },
+    {
+      "path": "app/src/scenes/outro.ts",
+      "sha256": "716a00bb0b08123de41e5ece1e0964dc0617656b05aad83f532f5971d6bb7886",
+      "size": 45393
+    },
+    {
+      "path": "app/src/scenes/paperclips-geo.ts",
+      "sha256": "c5d8512ff5e7d5cd3b26e8832ce7e9a89a54db9ad545a58e7b0b8f449cdd28f7",
+      "size": 6251
+    },
+    {
+      "path": "app/src/scenes/paperclips-glsl.ts",
+      "sha256": "0b47180ed58d188a0811f2a8867fce41f8955bc8818b0a507bee1fbb9205d922",
+      "size": 12859
+    },
+    {
+      "path": "app/src/scenes/paperclips.ts",
+      "sha256": "fce29aed7a6eab5ac9f1c12c15923d0c5eb3020690266346a60e26ea014566a1",
+      "size": 21367
+    },
+    {
+      "path": "app/src/scenes/prompt-data.ts",
+      "sha256": "d43afeff8de094a0b069aea29c0665e5733b6ff895e5f267427f6755cc41d061",
+      "size": 3357
+    },
+    {
+      "path": "app/src/scenes/prompt.ts",
+      "sha256": "633be4f283d5eecd3a3dc79c40009095ab8161b5e441c7c6fe1efc57b2069e0e",
+      "size": 37436
+    },
+    {
+      "path": "app/src/scenes/room-geo.ts",
+      "sha256": "4c58baf03ed543c06096235c3afbdfac8cbf0b8c00a8f241ee4fd63e854830e1",
+      "size": 12335
+    },
+    {
+      "path": "app/src/scenes/room-shrooms.ts",
+      "sha256": "ec30f6c36021cad11cea8f2b86acd61336456dc3b8f0af7cdaccca629bb25d7a",
+      "size": 2099
+    },
+    {
+      "path": "app/src/scenes/room.ts",
+      "sha256": "cb978260bd83069b6f671fc59381c86883fda436c27e28bb149545ce1cd02745",
+      "size": 75167
+    },
+    {
+      "path": "app/src/scenes/shoggoth-glsl.ts",
+      "sha256": "9bccce7c7e16017c616bbd6b9119edeb30439ccb2b7898f14a081638b3a0999a",
+      "size": 21361
+    },
+    {
+      "path": "app/src/scenes/shoggoth.ts",
+      "sha256": "639aa70aa7562b659cd7386241b60b591313105791d08994aa4c500a1ee2a765",
+      "size": 43885
+    },
+    {
+      "path": "app/src/scenes/spacetime-lens.ts",
+      "sha256": "0e6ff00183bad51d3001009d7488cbc180553f392967d348efa5568b5cb34bff",
+      "size": 10274
+    },
+    {
+      "path": "app/src/scenes/spacetime.ts",
+      "sha256": "f9e69e74bcf35977d7dc9fb6afe263cf3f3403e1801313b6c07cb36dcdb711bd",
+      "size": 47201
+    },
+    {
+      "path": "app/src/scenes/stack-kit.ts",
+      "sha256": "df79961e6a579c59e3ed33bc5d0daddcb35677f30781c13a5bb59df2ccff8ae8",
+      "size": 9401
+    },
+    {
+      "path": "app/src/scenes/stack.ts",
+      "sha256": "0416f7cdb883b089f4d83ba1b743f5248cd6d8b0b8e8cdcb6833637ee6f5123b",
+      "size": 36610
+    },
+    {
+      "path": "app/src/timeline.ts",
+      "sha256": "1c4369716aa88c5e33ff771ae060b91729d02e39ed2e6f927ec1b3fe5505ef61",
+      "size": 3875
+    },
+    {
+      "path": "app/tsconfig.json",
+      "sha256": "83975a998a649e6a42098830ba5a016e92d43482ca3ab6d4f2b0f2d91e0c4762",
+      "size": 456
+    },
+    {
+      "path": "app/tsconfig.scripts.json",
+      "sha256": "a3f395d8de82e44f57d9a5353fd77fc333080115e6b4af3a57680fbc2e683bb7",
+      "size": 104
+    },
+    {
+      "path": "app/vite.config.ts",
+      "sha256": "5c19a0a1f06b0f364352949dc7d60bd8686e20651e130737f5a9707e2e712cda",
+      "size": 1352
+    },
+    {
+      "path": "docs/ENGINE.md",
+      "sha256": "4b3bde397dc9a78a60db0844619a2ef5cfbc130b40a2b6be2c306d8a28df4430",
+      "size": 16742
+    },
+    {
+      "path": "docs/TREATMENT.md",
+      "sha256": "c9dd635a7cef34b7bb4371d20db30b84668082a7eed0a40c70388141e358524e",
+      "size": 24508
+    }
+  ],
+  "excluded_asset_paths": [
+    "app/public/fonts/Archivo-w1000-300.ttf",
+    "app/public/fonts/Archivo-w1000-500.ttf",
+    "app/public/fonts/Archivo-w1000-700.ttf",
+    "app/public/fonts/Archivo-w1000-900.ttf",
+    "app/public/fonts/Archivo-w1125-300.ttf",
+    "app/public/fonts/Archivo-w1125-500.ttf",
+    "app/public/fonts/Archivo-w1125-700.ttf",
+    "app/public/fonts/Archivo-w1125-900.ttf",
+    "app/public/fonts/Archivo-w1250-300.ttf",
+    "app/public/fonts/Archivo-w1250-500.ttf",
+    "app/public/fonts/Archivo-w1250-700.ttf",
+    "app/public/fonts/Archivo-w1250-900.ttf",
+    "app/public/fonts/Archivo-w620-300.ttf",
+    "app/public/fonts/Archivo-w620-500.ttf",
+    "app/public/fonts/Archivo-w620-700.ttf",
+    "app/public/fonts/Archivo-w620-900.ttf",
+    "app/public/fonts/Archivo-w750-300.ttf",
+    "app/public/fonts/Archivo-w750-500.ttf",
+    "app/public/fonts/Archivo-w750-700.ttf",
+    "app/public/fonts/Archivo-w750-900.ttf",
+    "app/public/fonts/Archivo-w875-300.ttf",
+    "app/public/fonts/Archivo-w875-500.ttf",
+    "app/public/fonts/Archivo-w875-700.ttf",
+    "app/public/fonts/Archivo-w875-900.ttf",
+    "app/public/fonts/ArchivoItalic-w1000-400.ttf",
+    "app/public/fonts/ArchivoItalic-w1000-800.ttf",
+    "app/public/fonts/ArchivoItalic-w750-400.ttf",
+    "app/public/fonts/ArchivoItalic-w750-800.ttf",
+    "app/public/fonts/Cormorant-400.ttf",
+    "app/public/fonts/Cormorant-600.ttf",
+    "app/public/fonts/CormorantItalic-400.ttf",
+    "app/public/fonts/CormorantItalic-600.ttf",
+    "app/public/fonts/src/Archivo-Italic[wdth,wght].ttf",
+    "app/public/fonts/src/Archivo[wdth,wght].ttf",
+    "app/public/fonts/src/CormorantGaramond-Italic[wght].ttf",
+    "app/public/fonts/src/CormorantGaramond[wght].ttf",
+    "app/public/fonts/src/IBMPlexMono-Bold.ttf",
+    "app/public/fonts/src/IBMPlexMono-Italic.ttf",
+    "app/public/fonts/src/IBMPlexMono-Light.ttf",
+    "app/public/fonts/src/IBMPlexMono-Medium.ttf",
+    "app/public/fonts/src/IBMPlexMono-Regular.ttf",
+    "app/public/fonts/src/IBMPlexMono-SemiBold.ttf",
+    "app/public/fonts/src/OFL.txt",
+    "app/public/fonts/stroke/EMSAllure.svg",
+    "app/public/fonts/stroke/EMSFelix.svg",
+    "app/public/fonts/stroke/EMSOsmotron.svg",
+    "app/public/fonts/stroke/EMSReadability.svg",
+    "app/public/fonts/stroke/EMSTech.svg",
+    "app/public/fonts/stroke/HersheySans1.svg",
+    "app/public/fonts/stroke/HersheyScript1.svg",
+    "app/public/fonts/stroke/HersheySerifMed.svg",
+    "app/public/plates/fig01.jpg",
+    "app/public/plates/fig02.jpg",
+    "app/public/plates/fig03.jpg",
+    "app/public/plates/fig04.jpg",
+    "app/public/plates/fig05.jpg",
+    "app/public/plates/fig06.jpg",
+    "app/public/plates/fig07.jpg",
+    "app/public/plates/fig08.jpg",
+    "app/public/plates/fig09.jpg",
+    "app/public/plates/fig10.jpg",
+    "app/public/plates/fig11.jpg",
+    "app/public/plates/fig12.jpg",
+    "app/public/plates/fig13.jpg",
+    "app/public/plates/fig14.jpg",
+    "audio/pdoom.mp3",
+    "data/audio.approx.json",
+    "data/audio.json",
+    "data/lyrics.approx.json",
+    "data/lyrics.json",
+    "lyrics/lyrics.src.js"
+  ],
+  "notes": [
+    "Code/configuration snapshot only; song, lyrics, timing JSON, fonts, montage images, stems and weights are not bundled.",
+    "Copy into a real work directory before running. Current-song rules and platform dependencies require adaptation."
+  ],
+  "work_directories": [
+    "audio",
+    "lyrics",
+    "data",
+    "app/public/fonts/src",
+    "app/public/plates"
+  ]
+}

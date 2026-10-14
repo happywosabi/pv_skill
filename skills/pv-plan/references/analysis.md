@@ -1,5 +1,7 @@
 # 音频分析依赖与验收
 
+下述11个分析脚本及pyproject/uv.lock已包含在`pv-plan/assets/pdoom-project/analysis/`；使用[bootstrap_project.py](../scripts/bootstrap_project.py)复制到ROOT后，从ROOT/analysis执行。文件用途与来源版本见[pdoom脚本说明](pdoom-scripts.md)。不要把资源目录的默认路径误当成当前歌曲工程。
+
 ## 真实顺序
 
 混音/歌词 → 分离声部 → 测量并配置时间偏移 → 校时16k人声、CTC emissions、Whisper核对、vocal_feats → align与analyze → 图/听核验 → 正式JSON。

@@ -106,3 +106,21 @@ PYTHONDONTWRITEBYTECODE=1 python3 skills/pv-plan/scripts/test_workflow.py
 - 技能包创建与验证不会自动开始制作新歌；外部发布、上传和发消息仍需用户明确指令。
 
 WAV helper 的真实读写测试需 numpy、soundfile；可在现有分析环境或隔离测试环境运行 `skills/pv-alignment-prep/scripts/test_prepare_vocal.py`，不必为了技能验证安装全套大模型。
+
+## 随技能提供的 pdoom 工具
+
+总入口的 `assets/pdoom-project/` 包含原项目11个Python分析脚本、`app/scripts/render.ts`、浏览器引擎/场景源码、依赖锁文件和原API文档，共83个上游文件。固定来源提交及逐文件SHA256记录于 `UPSTREAM.json`，保留原MIT许可。
+
+没有制作工程时，从技能包复制一个可适配的代码模板：
+
+```bash
+python3 skills/pv-plan/scripts/bootstrap_project.py --destination /path/to/pv-project
+python3 skills/pv-plan/scripts/bootstrap_project.py --destination /path/to/pv-project --apply
+python3 skills/pv-plan/scripts/workflow.py inspect --root /path/to/pv-project
+```
+
+默认只读预检查；`--apply`才复制，拒绝覆盖不同内容的已有文件。已安装技能也能用安装目录内的同一脚本。已有工程直接复用，不强制重新复制。
+
+模板不含歌曲、原始歌词、时序JSON、字体、蒙太奇图、声部和模型权重。源代码已齐备不等于作品可运行；按输入、分析、素材和渲染技能补齐。所有分析/导出命令从实际工程的analysis/app运行，不在技能assets目录创建缓存或改原始快照。
+
+详见[脚本清单、依赖与运行说明](../skills/pv-plan/references/pdoom-scripts.md)。

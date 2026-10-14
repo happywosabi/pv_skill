@@ -42,7 +42,19 @@ python3 skills/pv-plan/scripts/install.py --apply
 
 ## 制作工程与任务记录
 
-本仓库提供技能与辅助脚本。制作流程以 [pdoom-video](https://github.com/mexicat/pdoom-video) 的 TypeScript/Three.js 渲染器和 Python 音频分析工具为基础。使用时准备对应的制作工程，在工程中调用入口，或明确提供工程根目录：
+本仓库提供技能、辅助脚本及 [pdoom-video](https://github.com/mexicat/pdoom-video) 的工程代码模板。模板位于 `skills/pv-plan/assets/pdoom-project/`，随总入口一起安装，含11个Python分析脚本、导出脚本、渲染引擎/场景代码、依赖锁与API文档，共83个上游文件。来源提交、文件哈希和原MIT许可均保留。详见 [脚本清单与运行说明](skills/pv-plan/references/pdoom-scripts.md)。
+
+已有制作工程可以直接复用；没有工程时，将模板复制到任务工作目录：
+
+```bash
+python3 skills/pv-plan/scripts/bootstrap_project.py --destination ../my-pv
+python3 skills/pv-plan/scripts/bootstrap_project.py --destination ../my-pv --apply
+python3 skills/pv-plan/scripts/workflow.py inspect --root ../my-pv
+```
+
+默认只读预检查；`--apply`才复制，拒绝覆盖不同内容的现有文件。模板不含歌曲、原始歌词、时序JSON、字体、蒙太奇图、声部和模型权重，这些由对应技能在真实制作任务中补齐。不要在安装的技能assets目录执行分析、改写配置或输出成片。
+
+在实际工程中调用入口，或明确提供工程根目录：
 
 ```bash
 python3 skills/pv-plan/scripts/workflow.py inspect --root /path/to/pdoom-video
@@ -58,6 +70,7 @@ python3 skills/pv-plan/scripts/workflow.py inspect --root /path/to/pdoom-video
 
 ```bash
 PYTHONDONTWRITEBYTECODE=1 python3 skills/pv-plan/scripts/test_workflow.py
+PYTHONDONTWRITEBYTECODE=1 python3 skills/pv-plan/scripts/test_bootstrap_project.py
 ```
 
 真实 WAV 读写检查需要 `numpy` 和 `soundfile`，可在隔离环境或已有分析环境执行：

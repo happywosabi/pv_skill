@@ -1,5 +1,7 @@
 # 音频模型准备
 
+模型调用脚本在总入口的工程模板中，参见[pdoom脚本说明](pdoom-scripts.md)。这些是源码和配置，模型权重必须在实际ROOT的环境中按任务准备；不要在技能安装目录触发权重下载。
+
 ## 实际模型与缓存
 
 原脚本使用Demucs htdemucs_ft、torchaudio.pipelines.MMS_FA与WAV2VEC2_ASR_LARGE_LV60K_960H、mlx-whisper large-v3-turbo，以及一个mel-band-roformer karaoke主唱模型。最后一个的具体权重名/参数没有提交，必须查当前可用模型实际选型，不伪造原作者记录。
